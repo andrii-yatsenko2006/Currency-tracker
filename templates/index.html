@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Обмінник валют</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ласкаво просимо в обмінник валют!</h1>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="/">
+        <label for="from_currency">Виберіть валюту, яку хочете обміняти:</label><br>
+        <select id="from_currency" name="from_currency" required>
+            <option value="USD">USD - Долар США</option>
+            <option value="EUR">EUR - Євро</option>
+            <option value="UAH">UAH - Гривня</option>
+            <option value="GBP">GBP - Фунт стерлінгів</option>
+            <option value="JPY">JPY - Японська єна</option>
+            <option value="CAD">CAD - Канадський долар</option>
+            <option value="AUD">AUD - Австралійський долар</option>
+            <option value="CHF">CHF - Швейцарський франк</option>
+            <option value="PLN">PLN - Польський злотий</option>
+            <option value="CNY">CNY - Китайський юань</option>
+            <option value="NZD">NZD - Новозеландський долар</option>
+            <option value="SEK">SEK - Шведська крона</option>
+            <option value="NOK">NOK - Норвезька крона</option>
+            <option value="KRW">KRW - Південнокорейський вон</option>
+            <option value="SGD">SGD - Сінгапурський долар</option>
+            <option value="HKD">HKD - Гонконгський долар</option>
+            <option value="MXN">MXN - Мексиканське песо</option>
+            <option value="INR">INR - Індійська рупія</option>
+            <option value="AED">AED - Арабський дирхам</option>
+            <option value="TRY">TRY - Турецька ліра</option>
+        </select><br><br>
+
+        <label for="to_currency">Виберіть валюту, яку хочете отримати:</label><br>
+        <select id="to_currency" name="to_currency" required>
+            <option value="USD">USD - Долар США</option>
+            <option value="EUR">EUR - Євро</option>
+            <option value="UAH">UAH - Гривня</option>
+            <option value="GBP">GBP - Фунт стерлінгів</option>
+            <option value="JPY">JPY - Японська єна</option>
+            <option value="CAD">CAD - Канадський долар</option>
+            <option value="AUD">AUD - Австралійський долар</option>
+            <option value="CHF">CHF - Швейцарський франк</option>
+            <option value="PLN">PLN - Польський злотий</option>
+            <option value="CNY">CNY - Китайський юань</option>
+            <option value="NZD">NZD - Новозеландський долар</option>
+            <option value="SEK">SEK - Шведська крона</option>
+            <option value="NOK">NOK - Норвезька крона</option>
+            <option value="KRW">KRW - Південнокорейський вон</option>
+            <option value="SGD">SGD - Сінгапурський долар</option>
+            <option value="HKD">HKD - Гонконгський долар</option>
+            <option value="MXN">MXN - Мексиканське песо</option>
+            <option value="INR">INR - Індійська рупія</option>
+            <option value="AED">AED - Арабський дирхам</option>
+            <option value="TRY">TRY - Турецька ліра</option>
+        </select><br><br>
+
+        <label for="amount">Вкажіть суму для обміну:</label><br>
+        <input type="number" id="amount" name="amount" step="0.01" placeholder="Наприклад, 100.00" value="{{ result.amount if result else '' }}"><br><br>
+
+        <button type="submit">Обміняти</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <h2>Результат обміну:</h2>
+        <p>{{ result.amount }} {{ result.from_currency }} = {{ result.exchanged_amount }} {{ result.to_currency }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
